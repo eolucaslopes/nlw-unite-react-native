@@ -1,13 +1,25 @@
-import { View, Image, Platform } from 'react-native';
+import { useState } from 'react';
+import { View, Image, Platform, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { colors } from '@/styles/colors';
 
 export default function Register() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+
+  function handelRegister() {
+    if (!name.trim() || !email.trim()) {
+      return Alert.alert('Inscrição', 'Preencha todos os campos!')
+    }
+
+    router.push('/ticket')
+  }
+
   return (
     <View className="flex-1 bg-green-500 items-center justify-center p-8">
       {Platform.OS === 'ios' && <StatusBar style="light" />}
@@ -24,7 +36,7 @@ export default function Register() {
             color={colors.green[200]}
             size={20} 
           />
-          <Input.Field placeholder="Nome completo" />
+          <Input.Field placeholder="Nome completo" onChangeText={setName} />
         </Input>
 
         <Input>
@@ -33,10 +45,10 @@ export default function Register() {
             color={colors.green[200]}
             size={20} 
           />
-          <Input.Field placeholder="E-mail" keyboardType="email-address" />
+          <Input.Field placeholder="E-mail" keyboardType="email-address" onChangeText={setEmail} />
         </Input>
 
-        <Button title="Realizar inscrição" />
+        <Button title="Realizar inscrição" onPress={handelRegister} />
 
         <Link href="/" className="text-gray-100 text-base font-bold
         text-center mt-8">
