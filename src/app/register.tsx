@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { View, Image, Platform, Alert } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { View, StatusBar, Image, Platform, Alert } from 'react-native';
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 
@@ -22,7 +21,7 @@ export default function Register() {
 
   return (
     <View className="flex-1 bg-green-500 items-center justify-center p-8">
-      {Platform.OS === 'ios' && <StatusBar style="light" />}
+      {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
 
       <Image 
       source={require("@/assets/logo.png")} 
