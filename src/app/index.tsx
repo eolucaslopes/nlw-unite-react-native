@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <View className="flex-1 bg-green-500 items-center justify-center p-8">
-      {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+      <StatusBar barStyle="light-content" />
 
       <Image 
       source={require("@/assets/logo.png")} 

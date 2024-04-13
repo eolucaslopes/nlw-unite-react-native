@@ -5,8 +5,20 @@ import {
   ImageBackground, 
   TouchableOpacity,
 } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
-export function Credential() {
+import { colors } from "@/styles/colors";
+
+import { QRCode } from "@/components/qrcode";
+
+
+type Props = {
+  image?: string
+  onChangeAvatar?: () => void
+  onShowQRCode?: () => void
+}
+
+export function Credential({ onChangeAvatar, onShowQRCode, image }: Props) {
   return (
     <View className="w-full self-stretch items-center">
       <Image 
@@ -28,10 +40,23 @@ export function Credential() {
           <View className="w-40 h-40 bg-black rounded-full" />
         </ImageBackground>
 
-        <Image 
-          source={{ uri: "https://avatars.githubusercontent.com/u/164359615?v=4"}} 
-          className="w-36 h-36 rounded-full -mt-24"
-        />
+        {image ? (
+          <TouchableOpacity activeOpacity={0.9} onPress={onChangeAvatar}>
+            <Image 
+              source={{ uri: image}} 
+              className="w-36 h-36 rounded-full -mt-24"
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity 
+            activeOpacity={0.9} 
+            className="w-36 h-36 rounded-full -mt-24 bg-gray-400 items-center 
+            justify-center"
+            onPress={onChangeAvatar}
+          >
+            <Feather name="camera" color={colors.green[400]} size={32} />
+          </TouchableOpacity>
+        )}
 
         <Text className="font-bold text-2xl text-zinc-50 mt-4">
           Lucas Lopes
@@ -41,11 +66,13 @@ export function Credential() {
           lucas@email.com
         </Text>
 
-        <Image 
-          source={require("@/assets/ticket/qrcode.png")} 
-          className="w-32 h-32"
-        />
-        <TouchableOpacity activeOpacity={0.7} className="mt-6">
+        <QRCode value="teste" size={120} />
+
+        <TouchableOpacity 
+          activeOpacity={0.7} 
+          className="mt-6" 
+          onPress={onShowQRCode}
+        >
           <Text className="font-body text-orange-500 text-sm">
             Ampliar QRCode
           </Text>
