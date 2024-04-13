@@ -84,8 +84,9 @@ async function handleSelectImage() {
             setOnShowQRCode(false)} 
           >
             <QRCode value="teste" size={300}/>
-            <Text 
-              className="text-base text-white font-bold text-center mt-6">Fechar</Text>
+            <Text className="font-body text-orange-500 text-sm text-center mt-8">
+              Fechar QRCode
+            </Text>
           </TouchableOpacity>
         </View>
       </Modal>
